@@ -9,6 +9,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import flixel.util.FlxTimer;
 
 using StringTools;
 
@@ -24,6 +25,8 @@ class FreeplayState extends MusicBeatState
 	var diffText:FlxText;
 	var lerpScore:Int = 0;
 	var intendedScore:Int = 0;
+
+	var songWait:FlxTimer = new FlxTimer();
 
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
@@ -157,6 +160,7 @@ class FreeplayState extends MusicBeatState
 	public function addSong(songName:String, weekNum:Int, songCharacter:String)
 	{
 		songs.push(new SongMetadata(songName, weekNum, songCharacter));
+		FlxG.sound.cache(Paths.inst(songName));
 	}
 
 	public function addWeek(songs:Array<String>, weekNum:Int, ?songCharacters:Array<String>)
@@ -277,7 +281,11 @@ class FreeplayState extends MusicBeatState
 		#end
 
 		#if PRELOAD_ALL
-		FlxG.sound.playMusic(Paths.inst(songs[curSelected].songName), 0);
+		FlxG.sound.music.stop();
+		songWait.cancel();
+		songWait.start(1, function(tmr:FlxTimer) {
+			FlxG.sound.playMusic(Paths.inst(songs[curSelected].songName), 0);
+		});
 		#end
 
 		var bullShit:Int = 0;
