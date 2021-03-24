@@ -20,6 +20,7 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import flixel.util.FlxSave;
 import lime.app.Application;
 import openfl.Assets;
 
@@ -27,6 +28,8 @@ using StringTools;
 
 class TitleState extends MusicBeatState
 {
+	private var gameSave:FlxSave;
+
 	static var initialized:Bool = false;
 
 	var blackScreen:FlxSprite;
@@ -60,23 +63,16 @@ class TitleState extends MusicBeatState
 		trace('NEWGROUNDS LOL');
 		#end
 
-		FlxG.save.bind('funkin', 'ninjamuffin99');
+		gameSave = new FlxSave(); // initialize
+		gameSave.bind('funkin', 'ninjamuffin99'); // bind to the named save slot
 
 		Highscore.load();
 
-		if (FlxG.save.data.weekUnlocked != null)
-		{
-			// FIX LATER!!!
-			// WEEK UNLOCK PROGRESSION!!
-			// StoryMenuState.weekUnlocked = FlxG.save.data.weekUnlocked;
+		if (gameSave.data.weekUnlocked == null) { gameSave.data.weekUnlocked = StoryMenuState.weekUnlocked; }
+		else { StoryMenuState.weekUnlocked = FlxG.save.data.weekUnlocked; }
 
-			if (StoryMenuState.weekUnlocked.length < 4)
-				StoryMenuState.weekUnlocked.insert(0, true);
-
-			// QUICK PATCH OOPS!
-			if (!StoryMenuState.weekUnlocked[0])
-				StoryMenuState.weekUnlocked[0] = true;
-		}
+		// save data
+		gameSave.flush();
 
 		#if FREEPLAY
 		FlxG.switchState(new FreeplayState());

@@ -161,12 +161,10 @@ class Character extends FlxSprite
 				frames = tex;
 
 				animation.addByPrefix('idle', "Mom Idle", 24, false);
-				animation.addByPrefix('singUP', "Mom Up Pose", 24, false);
-				animation.addByPrefix('singDOWN', "MOM DOWN POSE", 24, false);
-				animation.addByPrefix('singLEFT', 'Mom Left Pose', 24, false);
-				// ANIMATION IS CALLED MOM LEFT POSE BUT ITS FOR THE RIGHT
-				// CUZ DAVE IS DUMB!
-				animation.addByPrefix('singRIGHT', 'Mom Pose Left', 24, false);
+				animation.addByPrefix('singUP', "Mom Up Note", 24, false);
+				animation.addByPrefix('singDOWN', "Mom Down Note", 24, false);
+				animation.addByPrefix('singLEFT', 'Mom Left Note', 24, false);
+				animation.addByPrefix('singRIGHT', 'Mom Right Note', 24, false);
 
 				addOffset('idle');
 				addOffset("singUP", 14, 71);
@@ -181,12 +179,10 @@ class Character extends FlxSprite
 				frames = tex;
 
 				animation.addByPrefix('idle', "Mom Idle", 24, false);
-				animation.addByPrefix('singUP', "Mom Up Pose", 24, false);
-				animation.addByPrefix('singDOWN', "MOM DOWN POSE", 24, false);
-				animation.addByPrefix('singLEFT', 'Mom Left Pose', 24, false);
-				// ANIMATION IS CALLED MOM LEFT POSE BUT ITS FOR THE RIGHT
-				// CUZ DAVE IS DUMB!
-				animation.addByPrefix('singRIGHT', 'Mom Pose Left', 24, false);
+				animation.addByPrefix('singUP', "Mom Up Note", 24, false);
+				animation.addByPrefix('singDOWN', "Mom Down Note", 24, false);
+				animation.addByPrefix('singLEFT', 'Mom Left Note', 24, false);
+				animation.addByPrefix('singRIGHT', 'Mom Right Note', 24, false);
 
 				addOffset('idle');
 				addOffset("singUP", 14, 71);
@@ -198,11 +194,11 @@ class Character extends FlxSprite
 			case 'monster':
 				tex = Paths.getSparrowAtlas('Monster_Assets');
 				frames = tex;
-				animation.addByPrefix('idle', 'monster idle', 24, false);
-				animation.addByPrefix('singUP', 'monster up note', 24, false);
-				animation.addByPrefix('singDOWN', 'monster down', 24, false);
-				animation.addByPrefix('singLEFT', 'Monster left note', 24, false);
-				animation.addByPrefix('singRIGHT', 'Monster Right note', 24, false);
+				animation.addByPrefix('idle', 'Monster Idle', 24, false);
+				animation.addByPrefix('singUP', 'Monster Up Note', 24, false);
+				animation.addByPrefix('singDOWN', 'Monster Down Note', 24, false);
+				animation.addByPrefix('singLEFT', 'Monster Left Note', 24, false);
+				animation.addByPrefix('singRIGHT', 'Monster Right Note', 24, false);
 
 				addOffset('idle');
 				addOffset("singUP", -20, 50);
@@ -213,11 +209,11 @@ class Character extends FlxSprite
 			case 'monster-christmas':
 				tex = Paths.getSparrowAtlas('christmas/monsterChristmas');
 				frames = tex;
-				animation.addByPrefix('idle', 'monster idle', 24, false);
-				animation.addByPrefix('singUP', 'monster up note', 24, false);
-				animation.addByPrefix('singDOWN', 'monster down', 24, false);
-				animation.addByPrefix('singLEFT', 'Monster left note', 24, false);
-				animation.addByPrefix('singRIGHT', 'Monster Right note', 24, false);
+				animation.addByPrefix('idle', 'Monster Idle', 24, false);
+				animation.addByPrefix('singUP', 'Monster Up Note', 24, false);
+				animation.addByPrefix('singDOWN', 'Monster Down Note', 24, false);
+				animation.addByPrefix('singLEFT', 'Monster Left Note', 24, false);
+				animation.addByPrefix('singRIGHT', 'Monster Right Note', 24, false);
 
 				addOffset('idle');
 				addOffset("singUP", -20, 50);
