@@ -30,7 +30,6 @@ class StoryMenuState extends MusicBeatState
 	];
 	var curDifficulty:Int = 1;
 
-	//public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true];
 	public static var weekUnlocked:Array<Bool> = [true, false, false, false, false, false, false];
 
 	var weekCharacters:Array<Dynamic> = [
@@ -103,13 +102,13 @@ class StoryMenuState extends MusicBeatState
 		grpWeekText = new FlxTypedGroup<MenuItem>();
 		add(grpWeekText);
 
+		grpLocks = new FlxTypedGroup<FlxSprite>();
+		add(grpLocks);
+
 		var blackBarThingie:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, 56, FlxColor.BLACK);
 		add(blackBarThingie);
 
 		grpWeekCharacters = new FlxTypedGroup<MenuCharacter>();
-
-		grpLocks = new FlxTypedGroup<FlxSprite>();
-		add(grpLocks);
 
 		trace("Line 70");
 		

@@ -6,7 +6,6 @@ import sys.thread.Thread;
 #end
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.FlxState;
 import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.transition.TransitionData;
@@ -15,12 +14,10 @@ import flixel.group.FlxGroup;
 import flixel.input.gamepad.FlxGamepad;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
-import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-import flixel.util.FlxSave;
 import lime.app.Application;
 import openfl.Assets;
 
@@ -28,8 +25,6 @@ using StringTools;
 
 class TitleState extends MusicBeatState
 {
-	private var gameSave:FlxSave;
-
 	static var initialized:Bool = false;
 
 	var blackScreen:FlxSprite;
@@ -63,16 +58,15 @@ class TitleState extends MusicBeatState
 		trace('NEWGROUNDS LOL');
 		#end
 
-		gameSave = new FlxSave(); // initialize
-		gameSave.bind('funkin', 'ninjamuffin99'); // bind to the named save slot
+		//FlxG.save = new FlxSave(); // initialize
+		FlxG.save.bind('funkin', 'ninjamuffin99'); // bind to the named save slot
 
 		Highscore.load();
 
-		if (gameSave.data.weekUnlocked == null) { gameSave.data.weekUnlocked = StoryMenuState.weekUnlocked; }
-		else { StoryMenuState.weekUnlocked = FlxG.save.data.weekUnlocked; }
+		onSave();
 
 		// save data
-		gameSave.flush();
+		FlxG.save.flush();
 
 		#if FREEPLAY
 		FlxG.switchState(new FreeplayState());
@@ -411,6 +405,21 @@ class TitleState extends MusicBeatState
 			FlxG.camera.flash(FlxColor.WHITE, 4);
 			remove(credGroup);
 			skippedIntro = true;
+		}
+	}
+
+	function onSave():Void
+	{
+		// Do we already have a save? if not then we need to make one
+		if (FlxG.save.data.weekUnlocked == null)
+		{
+			var defaultWeekUnlocked:Array<Bool> = [true, false, false, false, false, false, false];
+
+			FlxG.save.data.weekUnlocked = defaultWeekUnlocked;
+		}
+		else
+		{
+			StoryMenuState.weekUnlocked = FlxG.save.data.weekUnlocked;
 		}
 	}
 }
