@@ -244,13 +244,26 @@ class PlayState extends MusicBeatState
 
 				for (i in 0...5)
 				{
-					var light:FlxSprite = new FlxSprite(city.x).loadGraphic(Paths.image('philly/win' + i));
+					var light:FlxSprite = new FlxSprite(city.x).loadGraphic(Paths.image('philly/win'));
 					light.scrollFactor.set(0.3, 0.3);
 					light.visible = false;
 					light.setGraphicSize(Std.int(light.width * 0.85));
 					light.updateHitbox();
 					light.antialiasing = true;
 					phillyCityLights.add(light);
+					switch (i)
+					{
+						case 0:
+							light.color = FlxColor.fromRGB(49, 162, 253, 255);
+						case 1:
+							light.color = FlxColor.fromRGB(49, 253, 140, 255);
+						case 2:
+							light.color = FlxColor.fromRGB(251, 51, 245, 255);
+						case 3:
+							light.color = FlxColor.fromRGB(253, 69, 49, 255);
+						case 4:
+							light.color = FlxColor.fromRGB(251, 166, 51, 255);
+					}
 				}
 
 				var streetBehind:FlxSprite = new FlxSprite(-40, 50).loadGraphic(Paths.image('philly/behindTrain'));
@@ -261,8 +274,6 @@ class PlayState extends MusicBeatState
 
 				trainSound = new FlxSound().loadEmbedded(Paths.sound('train_passes'));
 				FlxG.sound.list.add(trainSound);
-
-				// var cityLights:FlxSprite = new FlxSprite().loadGraphic(AssetPaths.win0.png);
 
 				var street:FlxSprite = new FlxSprite(-40, streetBehind.y).loadGraphic(Paths.image('philly/street'));
 				add(street);
@@ -1626,6 +1637,11 @@ class PlayState extends MusicBeatState
 					{
 						health -= 0.0475;
 						vocals.volume = 0;
+						if (combo > 5)
+						{
+							gf.playAnim('sad');
+						}
+						combo = 0;
 					}
 
 					daNote.active = false;
@@ -2050,7 +2066,8 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				badNoteCheck();
+				//badNoteCheck();
+				trace("Keyshit badnotecheck");
 			}
 		}
 
@@ -2189,7 +2206,8 @@ class PlayState extends MusicBeatState
 			goodNoteHit(note);
 		else
 		{
-			badNoteCheck();
+			//badNoteCheck();
+			trace("BadNoteCheck");
 		}
 	}
 
