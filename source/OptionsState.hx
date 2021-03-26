@@ -37,30 +37,10 @@ class OptionsState extends MusicBeatState
 	{
 		super.update(elapsed);
 
-		if (controls.UP_P)
-			curSelected -= 1;
-
-		if (controls.DOWN_P)
-			curSelected += 1;
-
-        if (controls.BACK)
-			FlxG.switchState(new MainMenuState());
-
-		if (curSelected < 0)
-			curSelected = textMenuItems.length - 1;
-
-		if (curSelected >= textMenuItems.length)
-			curSelected = 0;
-
-		grpOptionsTexts.forEach(function(txt:FlxText)
-		{
-			txt.color = FlxColor.WHITE;
-
-			if (txt.ID == curSelected)
-				txt.color = FlxColor.YELLOW;
-		});
-
-		if (controls.ACCEPT)
+		if (controls.UP_P) { curSelected -= 1; }
+		else if (controls.DOWN_P) { curSelected += 1; }
+		else if (controls.BACK) { FlxG.switchState(new MainMenuState()); }
+		else if (controls.ACCEPT)
 		{
 			switch (textMenuItems[curSelected])
 			{
@@ -70,6 +50,17 @@ class OptionsState extends MusicBeatState
                     onClear();
 			}
 		}
+
+		if (curSelected < 0) { curSelected = textMenuItems.length - 1; }
+		else if (curSelected >= textMenuItems.length) { curSelected = 0; }
+
+		grpOptionsTexts.forEach(function(txt:FlxText)
+		{
+			txt.color = FlxColor.WHITE;
+
+			if (txt.ID == curSelected)
+				txt.color = FlxColor.YELLOW;
+		});
 	}
 
     function onClear():Void

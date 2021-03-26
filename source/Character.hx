@@ -202,9 +202,9 @@ class Character extends FlxSprite
 
 				addOffset('idle');
 				addOffset("singUP", -20, 50);
-				addOffset("singRIGHT", -51);
+				addOffset("singRIGHT", -4, 10);
 				addOffset("singLEFT", -30);
-				addOffset("singDOWN", -30, -40);
+				addOffset("singDOWN", -30, -79);
 				playAnim('idle');
 			case 'monster-christmas':
 				tex = Paths.getSparrowAtlas('christmas/monsterChristmas');
@@ -217,9 +217,9 @@ class Character extends FlxSprite
 
 				addOffset('idle');
 				addOffset("singUP", -20, 50);
-				addOffset("singRIGHT", -51);
+				addOffset("singRIGHT", -4, 10);
 				addOffset("singLEFT", -30);
-				addOffset("singDOWN", -40, -94);
+				addOffset("singDOWN", -30, -79);
 				playAnim('idle');
 			case 'pico':
 				tex = Paths.getSparrowAtlas('Pico_FNF_assetss');

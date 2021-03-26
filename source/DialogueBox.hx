@@ -122,10 +122,10 @@ class DialogueBox extends FlxSpriteGroup
 		add(handSelect);
 
 
-		if (!talkingRight)
+		/*if (!talkingRight)
 		{
-			// box.flipX = true;
-		}
+			box.flipX = true;
+		}*/
 
 		dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
 		dropText.font = 'Pixel Arial 11 Bold';
@@ -139,8 +139,8 @@ class DialogueBox extends FlxSpriteGroup
 		add(swagDialogue);
 
 		dialogue = new Alphabet(0, 80, "", false, true);
-		// dialogue.x = 90;
-		// add(dialogue);
+		/* dialogue.x = 90;
+		add(dialogue);*/
 	}
 
 	var dialogueOpened:Bool = false;
