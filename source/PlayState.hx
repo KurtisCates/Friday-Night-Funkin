@@ -1923,9 +1923,11 @@ class PlayState extends MusicBeatState
 
 		var seperatedScore:Array<Int> = [];
 
-		seperatedScore.push(Math.floor(combo / 100));
-		seperatedScore.push(Math.floor((combo - (seperatedScore[0] * 100)) / 10));
-		seperatedScore.push(combo % 10);
+		var comboString:String = (combo + "");
+
+		if (comboString.length == 2) { seperatedScore.push(0); }
+			
+		for(i in 0...comboString.length) { seperatedScore.push(Std.parseInt(comboString.charAt(i))); }
 
 		var daLoop:Int = 0;
 		for (i in seperatedScore)
