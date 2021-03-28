@@ -1,6 +1,5 @@
 package;
 
-import openfl.filters.ShaderFilter;
 #if desktop
 import Discord.DiscordClient;
 #end
