@@ -34,7 +34,7 @@ class FreeplayState extends MusicBeatState
 	private var iconArray:Array<HealthIcon> = [];
 	var trackedAssets:Array<Dynamic> = [];
 
-	override function create()
+	override public function create():Void
 	{
 		var initSonglist = CoolUtil.getTextFile(Paths.txt('freeplaySonglist'));
 
@@ -138,7 +138,7 @@ class FreeplayState extends MusicBeatState
 
 		if (FlxG.sound.music.volume < 0.7)
 		{
-			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
+			FlxG.sound.music.volume += 0.5 * elapsed;
 		}
 
 		lerpScore = Math.floor(FlxMath.lerp(lerpScore, intendedScore, 0.4));

@@ -15,7 +15,7 @@ class GitarooPause extends MusicBeatState
 		super();
 	}
 
-	override function create()
+	override public function create():Void
 	{
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();

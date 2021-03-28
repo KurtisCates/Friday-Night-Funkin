@@ -32,7 +32,7 @@ class AnimationDebug extends FlxState
 		this.daAnim = daAnim;
 	}
 
-	override function create()
+	override public function create():Void
 	{
 		FlxG.sound.music.stop();
 

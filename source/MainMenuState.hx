@@ -34,7 +34,7 @@ class MainMenuState extends MusicBeatState
 
 	var trackedAssets:Array<Dynamic> = [];
 
-	override function create()
+	override public function create():Void
 	{
 		#if desktop
 		// Updating Discord Rich Presence
@@ -114,7 +114,7 @@ class MainMenuState extends MusicBeatState
 	{
 		if (FlxG.sound.music.volume < 0.8)
 		{
-			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
+			FlxG.sound.music.volume += 0.5 * elapsed;
 		}
 
 		if (!selectedSomethin)

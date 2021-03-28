@@ -17,7 +17,7 @@ class Preloader extends FlxBasePreloader
      
     var logo:Sprite;
      
-    override function create():Void 
+    override public function create():Void
     {
         this._width = Lib.current.stage.stageWidth;
         this._height = Lib.current.stage.stageHeight;

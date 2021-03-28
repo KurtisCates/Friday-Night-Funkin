@@ -1,5 +1,6 @@
 package;
 
+import openfl.filters.ShaderFilter;
 #if desktop
 import Discord.DiscordClient;
 #end
@@ -122,7 +123,7 @@ class PlayState extends MusicBeatState
 	var detailsPausedText:String = "";
 	#end
 
-	override public function create()
+	override public function create():Void
 	{
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
@@ -1347,7 +1348,7 @@ class PlayState extends MusicBeatState
 						trainFrameTiming = 0;
 					}
 				}
-				// phillyCityLights.members[curLight].alpha -= (Conductor.crochet / 1000) * FlxG.elapsed;
+				// phillyCityLights.members[curLight].alpha -= (Conductor.crochet / 1000) * elapsed;
 		}
 
 		super.update(elapsed);
@@ -1422,7 +1423,7 @@ class PlayState extends MusicBeatState
 		{
 			if (startedCountdown)
 			{
-				Conductor.songPosition += FlxG.elapsed * 1000;
+				Conductor.songPosition += elapsed * 1000;
 				if (Conductor.songPosition >= 0)
 					startSong();
 			}
@@ -1430,7 +1431,7 @@ class PlayState extends MusicBeatState
 		else
 		{
 			// Conductor.songPosition = FlxG.sound.music.time;
-			Conductor.songPosition += FlxG.elapsed * 1000;
+			Conductor.songPosition += elapsed * 1000;
 
 			if (!paused)
 			{
@@ -1442,7 +1443,7 @@ class PlayState extends MusicBeatState
 				{
 					songTime = (songTime + Conductor.songPosition) / 2;
 					Conductor.lastSongPos = Conductor.songPosition;
-					// Conductor.songPosition += FlxG.elapsed * 1000;
+					// Conductor.songPosition += elapsed * 1000;
 					// trace('MISSED FRAME');
 				}
 			}
@@ -1838,7 +1839,7 @@ class PlayState extends MusicBeatState
 
 	private function popUpScore(strumtime:Float):Void
 	{
-		var noteDiff:Float = Math.abs(strumtime - Conductor.songPosition);
+		var noteDiff:Float = strumtime - Conductor.songPosition;
 		// boyfriend.playAnim('hey');
 		vocals.volume = 1;
 
@@ -2110,7 +2111,7 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				badNoteCheck();
+				//badNoteCheck();
 				trace("Keyshit badnotecheck");
 			}
 		}
@@ -2250,7 +2251,7 @@ class PlayState extends MusicBeatState
 			goodNoteHit(note);
 		else
 		{
-			badNoteCheck();
+			//badNoteCheck();
 			trace("BadNoteCheck");
 		}
 	}

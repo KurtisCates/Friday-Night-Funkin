@@ -264,11 +264,6 @@ class Controls extends FlxActionSet
 	}
 	#end
 
-	override function update()
-	{
-		super.update();
-	}
-
 	// inline
 	public function checkByName(name:Action):Bool
 	{

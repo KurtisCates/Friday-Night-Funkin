@@ -33,7 +33,7 @@ class LoadingState extends MusicBeatState
 		this.stopMusic = stopMusic;
 	}
 	
-	override function create()
+	override public function create():Void
 	{
 		logo = new FlxSprite(-150, -100);
 		logo.frames = Paths.getSparrowAtlas('logoBumpin');

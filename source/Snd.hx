@@ -1229,7 +1229,7 @@ class Snd {
 		TW.terminateAll();
 	}
 	
-	public static function update() {
+	override public function update(elapsed:Float):Void
 		for ( p in PLAYING.backWardIterator())
 			if ( p.isComplete()){
 				#if !prod
@@ -1237,7 +1237,7 @@ class Snd {
 				#end
 				p.onComplete();
 			}
-		TW.update();//let tweens complete
+		TW.update(elapsed); // let tweens complete
 		
 		if(!released ) Faxe.fmod_update();
 	}

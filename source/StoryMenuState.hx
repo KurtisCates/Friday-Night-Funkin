@@ -70,7 +70,7 @@ class StoryMenuState extends MusicBeatState
 	
 	var trackedAssets:Array<flixel.FlxBasic> = [];
 
-	override function create()
+	override public function create():Void
 	{
 		transIn = FlxTransitionableState.defaultTransIn;
 		transOut = FlxTransitionableState.defaultTransOut;

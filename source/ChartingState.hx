@@ -73,7 +73,7 @@ class ChartingState extends MusicBeatState
 	var leftIcon:HealthIcon;
 	var rightIcon:HealthIcon;
 
-	override function create()
+	override public function create():Void
 	{
 		curSection = lastSection;
 
@@ -605,7 +605,7 @@ class ChartingState extends MusicBeatState
 					FlxG.sound.music.pause();
 					vocals.pause();
 
-					var daTime:Float = 700 * FlxG.elapsed;
+					var daTime:Float = 700 * elapsed;
 
 					if (FlxG.keys.pressed.W)
 					{
