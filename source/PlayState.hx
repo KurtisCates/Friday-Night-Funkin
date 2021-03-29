@@ -25,6 +25,9 @@ import flixel.ui.FlxBar;
 import flixel.util.FlxColor;
 import flixel.util.FlxSort;
 import flixel.util.FlxTimer;
+import openfl.filters.ColorMatrixFilter;
+import openfl.filters.BitmapFilter;
+
 
 using StringTools;
 
@@ -101,6 +104,7 @@ class PlayState extends MusicBeatState
 	var talking:Bool = true;
 	var songScore:Int = 0;
 	var scoreTxt:FlxText;
+	var filters:Array<BitmapFilter> = [];
 
 	public static var campaignScore:Int = 0;
 
@@ -307,6 +311,17 @@ class PlayState extends MusicBeatState
 					grpLimoDancers.add(dancer);
 				}
 
+				//Matrix shaders:
+				var matrix:Array<Float> = [
+					1, 0, 0, 0, 0,
+					0, 1, 0, 0, 0,
+					0, 0, 1, 0, 0,
+					0, 0, 0, 1, 0,
+				];
+				filters.push(new ColorMatrixFilter(matrix));
+				camGame.setFilters(filters);
+				camGame.filtersEnabled = true;
+
 				var limoTex = Paths.getSparrowAtlas('limo/limoDrive');
 
 				limo = new FlxSprite(-120, 550);
@@ -316,7 +331,6 @@ class PlayState extends MusicBeatState
 				limo.antialiasing = true;
 
 				fastCar = new FlxSprite(-300, 160).loadGraphic(Paths.image('limo/fastCarLol'));
-				// add(limo);
 			}
 			case 'cocoa':
 			{
@@ -2576,7 +2590,7 @@ class PlayState extends MusicBeatState
 		// Do we already have a save? if not then we need to make one
 		if (FlxG.save.data.weekUnlocked == null)
 		{
-			var defaultWeekUnlocked:Array<Bool> = [true, false, false, false, false, false, false];
+			var defaultWeekUnlocked:Array<Bool> = [true, true, false, false, false, false, false];
 
 			FlxG.save.data.weekUnlocked = defaultWeekUnlocked;
 		}
@@ -2585,6 +2599,6 @@ class PlayState extends MusicBeatState
 			StoryMenuState.weekUnlocked = FlxG.save.data.weekUnlocked;
 		}
 	}
-	
+
 	var curLight:Int = 0;
 }
