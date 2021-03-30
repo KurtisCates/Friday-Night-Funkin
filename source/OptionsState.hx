@@ -49,6 +49,8 @@ class OptionsState extends MusicBeatState
                 case "Erase Save Data":
                     onClear();
 			}
+
+			trace(textMenuItems[curSelected]);
 		}
 
 		if (curSelected < 0) { curSelected = textMenuItems.length - 1; }
