@@ -40,31 +40,14 @@ class FreeplayState extends MusicBeatState
 
 		for (i in 0...initSonglist.length)
 		{
-			songs.push(new SongMetadata(initSonglist[i], 1, 'gf'));
+			var data:Array<String> = initSonglist[i].split(':');
+			songs.push(new SongMetadata(data[0], Std.parseInt(data[2]), data[1]));
 		}
 
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
 		#end
-		
-		// Week 1
-		addWeek(['Bopeebo', 'Fresh', 'Dadbattle'], 1, ['dad']);
-
-		// Week 2
-		addWeek(['Spookeez', 'South', 'Monster'], 2, ['spooky', 'spooky', 'monster']);
-
-		// Week 3
-		addWeek(['Pico', 'Philly', 'Blammed'], 3, ['pico']);
-
-		// Week 4
-		addWeek(['Satin-Panties', 'High', 'Milf'], 4, ['mom']);
-
-		// Week 5
-		addWeek(['Cocoa', 'Eggnog', 'Winter-Horrorland'], 5, ['parents-christmas', 'parents-christmas', 'monster-christmas']);
-
-		// Week 6
-		addWeek(['Senpai', 'Roses', 'Thorns'], 6, ['senpai', 'senpai', 'spirit']);
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue'));
 		add(bg);
