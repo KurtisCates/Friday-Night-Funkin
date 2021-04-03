@@ -6,7 +6,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 
-class OptionsState extends MusicBeatState
+class OptionsState extends MusicBeatSubstate
 {
     var textMenuItems:Array<String> = ['Controls', 'Erase Save Data'];
 
@@ -67,9 +67,9 @@ class OptionsState extends MusicBeatState
 
     function onClear():Void
     {
-        var defaultWeekUnlocked:Array<Bool> = [true, false, false, false, false, false, false];
+        var defaultWeekUnlocked:Array<Bool> = [true, true, false, false, false, false, false];
 
 		FlxG.save.data.weekUnlocked = defaultWeekUnlocked;
-        FlxG.switchState(new TitleState());
+        FlxG.switchState(new MainMenuState());
     }
 }

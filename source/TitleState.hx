@@ -370,7 +370,6 @@ class TitleState extends MusicBeatState
 				addMoreText('Night');
 			case 15:
 				addMoreText('Funkin');
-
 			case 16:
 				skipIntro();
 		}

@@ -111,12 +111,15 @@ class ChartingState extends MusicBeatState
 				needsVoices: true,
 				player1: 'bf',
 				player2: 'dad',
+				gf: 'gf',
 				speed: 1,
 				validScore: false
 			};
 		}
 
+		#if FLX_MOUSE
 		FlxG.mouse.visible = true;
+		#end
 		FlxG.save.bind('funkin', 'ninjamuffin99');
 
 		tempBpm = _song.bpm;
@@ -223,12 +226,18 @@ class ChartingState extends MusicBeatState
 		});
 		player1DropDown.selectedLabel = _song.player1;
 
+		var gfDropDown = new FlxUIDropDownMenu(140, 140, FlxUIDropDownMenu.makeStrIdLabelArray(characters, true), function(character:String)
+		{
+			_song.gf = characters[Std.parseInt(character)];
+		});
+
 		var player2DropDown = new FlxUIDropDownMenu(140, 100, FlxUIDropDownMenu.makeStrIdLabelArray(characters, true), function(character:String)
 		{
 			_song.player2 = characters[Std.parseInt(character)];
 		});
 
 		player2DropDown.selectedLabel = _song.player2;
+		gfDropDown.selectedLabel = _song.gf;
 
 		var tab_group_song = new FlxUI(null, UI_box);
 		tab_group_song.name = "Song";
@@ -243,6 +252,7 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(stepperBPM);
 		tab_group_song.add(stepperSpeed);
 		tab_group_song.add(player1DropDown);
+		tab_group_song.add(gfDropDown);
 		tab_group_song.add(player2DropDown);
 
 		UI_box.addGroup(tab_group_song);
@@ -256,6 +266,7 @@ class ChartingState extends MusicBeatState
 	var check_changeBPM:FlxUICheckBox;
 	var stepperSectionBPM:FlxUINumericStepper;
 	var check_altAnim:FlxUICheckBox;
+	var check_bothAnim:FlxUICheckBox;
 
 	function addSectionUI():Void
 	{
@@ -298,6 +309,9 @@ class ChartingState extends MusicBeatState
 		check_altAnim = new FlxUICheckBox(10, 400, null, null, "Alt Animation", 100);
 		check_altAnim.name = 'check_altAnim';
 
+		check_bothAnim = new FlxUICheckBox(10, 440, null, null, "Both Animation", 100);
+		check_bothAnim.name = 'check_bothAnim';
+
 		check_changeBPM = new FlxUICheckBox(10, 60, null, null, 'Change BPM', 100);
 		check_changeBPM.name = 'check_changeBPM';
 
@@ -306,6 +320,7 @@ class ChartingState extends MusicBeatState
 		tab_group_section.add(stepperCopy);
 		tab_group_section.add(check_mustHitSection);
 		tab_group_section.add(check_altAnim);
+		tab_group_section.add(check_bothAnim);
 		tab_group_section.add(check_changeBPM);
 		tab_group_section.add(copyButton);
 		tab_group_section.add(clearSectionButton);

@@ -29,7 +29,6 @@ class Character extends FlxSprite
 		switch (curCharacter)
 		{
 			case 'gf':
-				// GIRLFRIEND CODE
 				tex = Paths.getSparrowAtlas('characters/GF_assets');
 				frames = tex;
 				animation.addByPrefix('cheer', 'GF Cheer', 24, false);
@@ -121,14 +120,13 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 			case 'dad':
-				// DAD ANIMATION LOADING CODE
-				tex = Paths.getSparrowAtlas('characters/DADDY_DEAREST');
+				tex = Paths.getSparrowAtlas('characters/Dad_assets');
 				frames = tex;
-				animation.addByPrefix('idle', 'Dad idle dance', 24);
-				animation.addByPrefix('singUP', 'Dad Sing Note UP', 24);
-				animation.addByPrefix('singRIGHT', 'Dad Sing Note RIGHT', 24);
-				animation.addByPrefix('singDOWN', 'Dad Sing Note DOWN', 24);
-				animation.addByPrefix('singLEFT', 'Dad Sing Note LEFT', 24);
+				animation.addByPrefix('idle', 'Dad Idle', 24);
+				animation.addByPrefix('singUP', 'Dad Up Note', 24);
+				animation.addByPrefix('singRIGHT', 'Dad Right Note', 24);
+				animation.addByPrefix('singDOWN', 'Dad Down Note', 24);
+				animation.addByPrefix('singLEFT', 'Dad Left Note', 24);
 
 				addOffset('idle');
 				addOffset("singUP", -6, 50);
@@ -466,23 +464,30 @@ class Character extends FlxSprite
 
 			case 'parents-christmas':
 				frames = Paths.getSparrowAtlas('characters/mom_dad_christmas_assets');
-				animation.addByPrefix('idle', 'Parent Christmas Idle', 24, false);
-				animation.addByPrefix('singUP', 'Parent Up Note Dad', 24, false);
-				animation.addByPrefix('singDOWN', 'Parent Down Note Dad', 24, false);
-				animation.addByPrefix('singLEFT', 'Parent Left Note Dad', 24, false);
-				animation.addByPrefix('singRIGHT', 'Parent Right Note Dad', 24, false);
 
-				animation.addByPrefix('singUP-alt', 'Parent Up Note Mom', 24, false);
+				animation.addByPrefix('idle', 'Parents Idle', 24, false);
 
-				animation.addByPrefix('singDOWN-alt', 'Parent Down Note Mom', 24, false);
-				animation.addByPrefix('singLEFT-alt', 'Parent Left Note Mom', 24, false);
-				animation.addByPrefix('singRIGHT-alt', 'Parent Right Note Mom', 24, false);
+				// Dad
+				animation.addByPrefix('singUP', 'Dad Up Note', 24, false);
+				animation.addByPrefix('singDOWN', 'Dad Down Note', 24, false);
+				animation.addByPrefix('singLEFT', 'Dad Left Note', 24, false);
+				animation.addByPrefix('singRIGHT', 'Dad Right Note', 24, false);
+
+				// Mom
+				animation.addByPrefix('singUP-alt', 'Mom Up Note', 24, false);
+				animation.addByPrefix('singDOWN-alt', 'Mom Down Note', 24, false);
+				animation.addByPrefix('singLEFT-alt', 'Mom Left Note', 24, false);
+				animation.addByPrefix('singRIGHT-alt', 'Mom Right Note', 24, false);
 
 				addOffset('idle');
+
+				// Dad
 				addOffset("singUP", -47, 24);
 				addOffset("singRIGHT", -1, -23);
 				addOffset("singLEFT", -30, 16);
 				addOffset("singDOWN", -31, -29);
+
+				// Mom
 				addOffset("singUP-alt", -47, 24);
 				addOffset("singRIGHT-alt", -1, -24);
 				addOffset("singLEFT-alt", -30, 15);
@@ -581,12 +586,12 @@ class Character extends FlxSprite
 		}
 	}
 
-	public function playAnim(AnimName:String, Force:Bool = false, Reversed:Bool = false, Frame:Int = 0):Void
+	public function playAnim(animName:String, force:Bool = false, reversed:Bool = false, frame:Int = 0):Void
 	{
-		animation.play(AnimName, Force, Reversed, Frame);
+		animation.play(animName, force, reversed, frame);
 
-		var daOffset = animOffsets.get(AnimName);
-		if (animOffsets.exists(AnimName))
+		var daOffset = animOffsets.get(animName);
+		if (animOffsets.exists(animName))
 		{
 			offset.set(daOffset[0], daOffset[1]);
 		}
@@ -595,16 +600,16 @@ class Character extends FlxSprite
 
 		if (curCharacter == 'gf')
 		{
-			if (AnimName == 'singLEFT')
+			if (animName == 'singLEFT')
 			{
 				danced = true;
 			}
-			else if (AnimName == 'singRIGHT')
+			else if (animName == 'singRIGHT')
 			{
 				danced = false;
 			}
 
-			if (AnimName == 'singUP' || AnimName == 'singDOWN')
+			if (animName == 'singUP' || animName == 'singDOWN')
 			{
 				danced = !danced;
 			}

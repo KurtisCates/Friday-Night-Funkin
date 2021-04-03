@@ -2493,6 +2493,7 @@
             }
         ],
         "player2": "monster",
+        "gf": "gf",
         "song": "Monster",
         "validScore": true,
         "needsVoices": true,

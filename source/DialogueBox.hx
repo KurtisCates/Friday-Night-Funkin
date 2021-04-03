@@ -1,5 +1,6 @@
 package;
 
+import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.text.FlxTypeText;
@@ -10,7 +11,7 @@ import flixel.util.FlxTimer;
 
 using StringTools;
 
-class DialogueBox extends FlxSpriteGroup
+class DialogueBox extends FlxTypedGroup<FlxSprite>
 {
 	var box:FlxSprite;
 
@@ -30,14 +31,14 @@ class DialogueBox extends FlxSpriteGroup
 	var portraitRight:FlxSprite;
 
 	var bgFade:FlxSprite;
-
-	public function new(talkingRight:Bool = true, ?dialogueList:Array<String>)
+	
+	public function new(?dialogueList:Array<String>)
 	{
 		super();
 
 		switch (PlayState.SONG.song.toLowerCase())
 		{
-			case 'senpai':
+			case 'senpai' | 'tutorial' | 'bopeebo' | 'fresh' | 'dadbattle':
 				FlxG.sound.playMusic(Paths.music('Lunchbox'), 0);
 				FlxG.sound.music.fadeIn(1, 0, 0.8);
 			case 'thorns':
@@ -84,6 +85,11 @@ class DialogueBox extends FlxSpriteGroup
 				var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.image('weeb/spiritFaceForward'));
 				face.setGraphicSize(Std.int(face.width * 6));
 				add(face);
+			case 'tutorial' | 'bopeebo' | 'fresh' | 'dadbattle':
+				hasDialog = true;
+				box.frames = Paths.getSparrowAtlas('speech_bubble_talking');
+				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
+				box.animation.addByPrefix('normal', 'speech bubble normal', 24, true);
 		}
 
 		this.dialogueList = dialogueList;
@@ -109,10 +115,20 @@ class DialogueBox extends FlxSpriteGroup
 		add(portraitRight);
 		portraitRight.visible = false;
 		
-		box.animation.play('normalOpen');
-		box.setGraphicSize(Std.int(box.width * PlayState.daPixelZoom * 0.9));
-		box.updateHitbox();
-		add(box);
+		switch (PlayState.SONG.song.toLowerCase())
+		{
+			case 'senpai' | 'roses' | 'thorns':
+				box.animation.play('normalOpen');
+				box.setGraphicSize(Std.int(box.width * PlayState.daPixelZoom * 0.9));
+				box.updateHitbox();
+				add(box);
+			case 'tutorial' | 'bopeebo' | 'fresh' | 'dadbattle':
+				box.animation.play('normalOpen');
+				box.antialiasing = true;
+				box.updateHitbox();
+				box.setPosition(box.getPosition().x - 230, box.getPosition().y + 340);
+				add(box);
+		}
 
 		box.screenCenter(X);
 		portraitLeft.screenCenter(X);
@@ -129,6 +145,7 @@ class DialogueBox extends FlxSpriteGroup
 		add(swagDialogue);
 
 		dialogue = new Alphabet(0, 80, "", false, true);
+		forEach(function(sprite) sprite.scrollFactor.set(0, 0));
 	}
 
 	var dialogueOpened:Bool = false;
@@ -137,13 +154,18 @@ class DialogueBox extends FlxSpriteGroup
 	override function update(elapsed:Float)
 	{
 		// HARD CODING CUZ IM STUPDI
-		if (PlayState.SONG.song.toLowerCase() == 'roses')
-			portraitLeft.visible = false;
-		if (PlayState.SONG.song.toLowerCase() == 'thorns')
-		{
-			portraitLeft.visible = false;
-			swagDialogue.color = FlxColor.WHITE;
-			dropText.color = FlxColor.BLACK;
+		switch (PlayState.SONG.song.toLowerCase()){
+			case 'roses':
+				portraitLeft.visible = false;
+			case 'thorns':
+				portraitLeft.visible = false;
+				swagDialogue.color = FlxColor.WHITE;
+				dropText.color = FlxColor.BLACK;
+			case 'tutorial' | 'bopeebo' | 'fresh' | 'dadbattle':
+				portraitLeft.visible = false;
+				portraitRight.visible = false;
+				swagDialogue.color = FlxColor.BLACK;
+				dropText.visible = false;
 		}
 
 		dropText.text = swagDialogue.text;
@@ -175,7 +197,9 @@ class DialogueBox extends FlxSpriteGroup
 				{
 					isEnding = true;
 
-					if (PlayState.SONG.song.toLowerCase() == 'senpai' || PlayState.SONG.song.toLowerCase() == 'thorns')
+					if (PlayState.SONG.song.toLowerCase() == 'senpai' || PlayState.SONG.song.toLowerCase() == 'tutorial'
+						|| PlayState.SONG.song.toLowerCase() == 'bopeebo' || PlayState.SONG.song.toLowerCase() == 'fresh'
+						|| PlayState.SONG.song.toLowerCase() == 'dadbattle' || PlayState.SONG.song.toLowerCase() == 'thorns')
 						FlxG.sound.music.fadeOut(2.2, 0);
 
 					new FlxTimer().start(0.2, function(tmr:FlxTimer)
@@ -210,11 +234,6 @@ class DialogueBox extends FlxSpriteGroup
 	function startDialogue():Void
 	{
 		cleanDialog();
-		// var theDialog:Alphabet = new Alphabet(0, 70, dialogueList[0], false, true);
-		// dialogue = theDialog;
-		// add(theDialog);
-
-		// swagDialogue.text = ;
 		swagDialogue.resetText(dialogueList[0]);
 		swagDialogue.start(0.04, true);
 
@@ -239,8 +258,8 @@ class DialogueBox extends FlxSpriteGroup
 
 	function cleanDialog():Void
 	{
-		var splitName:Array<String> = dialogueList[0].split(":");
-		curCharacter = splitName[1];
-		dialogueList[0] = dialogueList[0].substr(splitName[1].length + 2).trim();
+		var data:Array<String> = dialogueList[0].split(":");
+		curCharacter = data[1];
+		dialogueList[0] = dialogueList[0].substr(data[1].length + 2).trim();
 	}
 }

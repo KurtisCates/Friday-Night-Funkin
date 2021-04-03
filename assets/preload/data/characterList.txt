@@ -10,6 +10,8 @@ parents-christmas
 monster-christmas
 bf-christmas
 gf-christmas
+gf-pixel
+gf-car
 monster
 bf-pixel
 senpai

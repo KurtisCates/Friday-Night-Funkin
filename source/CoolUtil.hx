@@ -1,5 +1,6 @@
 package;
 
+import haxe.Json;
 import lime.utils.Assets;
 
 using StringTools;
@@ -15,14 +16,14 @@ class CoolUtil
 
 	public static function getTextFile(path:String):Array<String>
 	{
-		var daList:Array<String> = Assets.getText(path).trim().split('\n');
+		var rawTxt:Array<String> = Assets.getText(path).trim().split('\n');
 
-		for (i in 0...daList.length)
+		for (i in 0...rawTxt.length)
 		{
-			daList[i] = daList[i].trim();
+			rawTxt[i] = rawTxt[i].trim();
 		}
 
-		return daList;
+		return rawTxt;
 	}
 
 	public static function numberArray(max:Int, ?min = 0):Array<Int>

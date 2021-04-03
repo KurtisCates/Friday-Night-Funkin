@@ -2775,6 +2775,7 @@
         "needsVoices": true,
         "player1": "bf-pixel",
         "player2": "senpai-angry",
+        "gf": "gf-pixel",
         "sectionLengths": [],
         "speed": 1.5000000000000004,
         "validScore": true
