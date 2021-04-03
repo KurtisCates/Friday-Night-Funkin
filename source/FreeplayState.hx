@@ -8,6 +8,8 @@ import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 
@@ -23,7 +25,7 @@ class FreeplayState extends MusicBeatState
 
 	var scoreText:FlxText;
 	var diffText:FlxText;
-	var lerpScore:Int = 0;
+	var tweenScore:Int = 0;
 	var intendedScore:Int = 0;
 
 	var songWait:FlxTimer = new FlxTimer();
@@ -124,12 +126,7 @@ class FreeplayState extends MusicBeatState
 			FlxG.sound.music.volume += 0.5 * elapsed;
 		}
 
-		lerpScore = Math.floor(FlxMath.lerp(lerpScore, intendedScore, 0.4));
-
-		if (Math.abs(lerpScore - intendedScore) <= 10)
-			lerpScore = intendedScore;
-
-		scoreText.text = "PERSONAL BEST:" + lerpScore;
+		scoreText.text = "PERSONAL BEST:" + tweenScore;
 
 		var upP = controls.UP_P;
 		var downP = controls.DOWN_P;
@@ -182,6 +179,9 @@ class FreeplayState extends MusicBeatState
 
 		#if !switch
 		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
+		FlxTween.num(tweenScore, intendedScore, 0.25, { ease: FlxEase.expoOut }, function(v:Float) {
+			tweenScore = Math.round(v);
+		});
 		#end
 
 		switch (curDifficulty)
@@ -210,7 +210,9 @@ class FreeplayState extends MusicBeatState
 
 		#if !switch
 		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
-		// lerpScore = 0;
+		FlxTween.num(tweenScore, intendedScore, 0.25, { ease: FlxEase.expoOut }, function(v:Float) {
+			tweenScore = Math.round(v);
+		});
 		#end
 
 		#if PRELOAD_ALL
