@@ -479,6 +479,12 @@ class Character extends FlxSprite
 				animation.addByPrefix('singLEFT-alt', 'Mom Left Note', 24, false);
 				animation.addByPrefix('singRIGHT-alt', 'Mom Right Note', 24, false);
 
+				// Both
+				animation.addByPrefix('singUP-both', 'Parents Up Note', 24, false);
+				animation.addByPrefix('singDOWN-both', 'Parents Down Note', 24, false);
+				animation.addByPrefix('singLEFT-both', 'Parents Left Note', 24, false);
+				animation.addByPrefix('singRIGHT-both', 'Parents Right Note', 24, false);
+
 				addOffset('idle');
 
 				// Dad
@@ -492,6 +498,12 @@ class Character extends FlxSprite
 				addOffset("singRIGHT-alt", -1, -24);
 				addOffset("singLEFT-alt", -30, 15);
 				addOffset("singDOWN-alt", -30, -27);
+
+				// Both
+				addOffset("singUP-both", -47, 24);
+				addOffset("singRIGHT-both", -1, -24);
+				addOffset("singLEFT-both", -30, 15);
+				addOffset("singDOWN-both", -30, -27);
 
 				playAnim('idle');
 		}

@@ -1,7 +1,5 @@
 package;
 
-import haxe.Json;
-import haxe.io.Path;
 #if desktop
 import Discord.DiscordClient;
 #end
@@ -1552,9 +1550,9 @@ class PlayState extends MusicBeatState
 					gfSpeed = 2;
 				case 112:
 					gfSpeed = 1;
-				case 163:
-					// FlxG.sound.music.stop();
-					// FlxG.switchState(new TitleState());
+				/*case 163:
+					FlxG.sound.music.stop();
+					FlxG.switchState(new TitleState());*/
 			}
 		}
 
@@ -1564,8 +1562,8 @@ class PlayState extends MusicBeatState
 			{
 				case 128, 129, 130:
 					vocals.volume = 0;
-					// FlxG.sound.music.stop();
-					// FlxG.switchState(new PlayState());
+					/* FlxG.sound.music.stop();
+					FlxG.switchState(new PlayState()); */
 			}
 		}
 		// better streaming of shit
@@ -1653,24 +1651,26 @@ class PlayState extends MusicBeatState
 					if (SONG.song != 'Tutorial')
 						camZooming = true;
 
-					var altAnim:String = "";
+					var anim:String = "";
 
 					if (SONG.notes[Math.floor(curStep / 16)] != null)
 					{
 						if (SONG.notes[Math.floor(curStep / 16)].altAnim)
-							altAnim = '-alt';
+							anim = '-alt';
+						else if (SONG.notes[Math.floor(curStep / 16)].bothAnim)
+							anim = '-both';
 					}
 
 					switch (Math.abs(daNote.noteData))
 					{
 						case 0:
-							player2.playAnim('singLEFT' + altAnim, true);
+							player2.playAnim('singLEFT' + anim, true);
 						case 1:
-							player2.playAnim('singDOWN' + altAnim, true);
+							player2.playAnim('singDOWN' + anim, true);
 						case 2:
-							player2.playAnim('singUP' + altAnim, true);
+							player2.playAnim('singUP' + anim, true);
 						case 3:
-							player2.playAnim('singRIGHT' + altAnim, true);
+							player2.playAnim('singRIGHT' + anim, true);
 					}
 
 					player2Strums.forEach(function(spr:FlxSprite)

@@ -65,6 +65,7 @@ class APIStuff
 {
 	public static var API:String = "";
 	public static var EncKey:String = "";
+	public static var ClientID:String = "814588678700924999";
 }
 
 ```
