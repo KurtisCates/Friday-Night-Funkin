@@ -21,7 +21,6 @@ import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
-import flixel.ui.FlxBar;
 import flixel.util.FlxColor;
 import flixel.util.FlxSort;
 import flixel.util.FlxTimer;
@@ -69,21 +68,17 @@ class PlayState extends MusicBeatState
 	private var health:Float = 1;
 	private var combo:Int = 0;
 
-	private var healthBarBG:FlxSprite;
-	private var healthBar:FlxBar;
-
 	private var generatedMusic:Bool = false;
 	private var startingSong:Bool = false;
 
-	private var iconP1:HealthIcon;
-	private var iconP2:HealthIcon;
 	private var camHUD:FlxCamera;
 	private var camGame:FlxCamera;
+
+	private var hud:HUD;
 
 	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
 
 	var halloweenBG:FlxSprite;
-	var isHalloween:Bool = false;
 
 	var phillyCityLights:FlxTypedGroup<FlxSprite>;
 	var phillyTrain:FlxSprite;
@@ -101,7 +96,6 @@ class PlayState extends MusicBeatState
 
 	var talking:Bool = true;
 	var songScore:Int = 0;
-	var scoreTxt:FlxText;
 	var filters:Array<BitmapFilter> = [];
 
 	var optionstate:OptionsState;
@@ -233,10 +227,8 @@ class PlayState extends MusicBeatState
 				halloweenBG.antialiasing = true;
 				add(halloweenBG);
 
-				isHalloween = true;
-
-				FlxG.sound.cache(Paths.inst('thunder_1'));
-				FlxG.sound.cache(Paths.inst('thunder_2'));
+				FlxG.sound.cache(Paths.sound('thunder_1'));
+				FlxG.sound.cache(Paths.sound('thunder_2'));
 			}
 			case 'pico' | 'blammed' | 'philly':
 			{
@@ -541,10 +533,7 @@ class PlayState extends MusicBeatState
 			{
 				curStage = 'schoolEvil';
 
-				var posX = 400;
-				var posY = 200;
-
-				var bg:FlxSprite = new FlxSprite(posX, posY);
+				var bg:FlxSprite = new FlxSprite(400, 200);
 				bg.frames = Paths.getSparrowAtlas('weeb/animatedEvilSchool');
 				bg.animation.addByPrefix('idle', 'background 2', 24);
 				bg.animation.play('idle');
@@ -598,7 +587,6 @@ class PlayState extends MusicBeatState
 					camPos.x += 600;
 					tweenCamIn();
 				}
-
 			case "spooky":
 				player2.y += 200;
 			case "monster":
@@ -682,7 +670,7 @@ class PlayState extends MusicBeatState
 		Conductor.songPosition = -5000;
 
 		strumLine = new FlxSprite(0, 50).makeGraphic(FlxG.width, 10);
-		strumLine.scrollFactor.set();
+		strumLine.scrollFactor.set(0, 0);
 
 		strumLineNotes = new FlxTypedGroup<FlxSprite>();
 		add(strumLineNotes);
@@ -717,38 +705,13 @@ class PlayState extends MusicBeatState
 
 		FlxG.fixedTimestep = false;
 
-		healthBarBG = new FlxSprite(0, FlxG.height * 0.9).loadGraphic(Paths.image('healthBar'));
-		healthBarBG.screenCenter(X);
-		healthBarBG.scrollFactor.set();
-		add(healthBarBG);
-
-		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
-			'health', 0, 2);
-		healthBar.scrollFactor.set();
-		healthBar.createFilledBar(FlxColor.RED, FlxColor.LIME, true, FlxColor.BLACK);
-		add(healthBar);
-
-		iconP1 = new HealthIcon(SONG.player1, true);
-		iconP1.y = healthBar.y - (iconP1.height / 2);
-		add(iconP1);
-
-		iconP2 = new HealthIcon(SONG.player2, false);
-		iconP2.y = healthBar.y - (iconP2.height / 2);
-		add(iconP2);
-
-		scoreTxt = new FlxText(healthBarBG.x + healthBarBG.width - 190, healthBarBG.y + 30, 0, "", 20);
-		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		scoreTxt.scrollFactor.set();
-		add(scoreTxt);
-
+		hud = new HUD(SONG);
+		add(hud);
+		
 		strumLineNotes.cameras = [camHUD];
 		notes.cameras = [camHUD];
-		healthBar.cameras = [camHUD];
-		healthBarBG.cameras = [camHUD];
-		iconP1.cameras = [camHUD];
-		iconP2.cameras = [camHUD];
-		scoreTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
+		hud.cameras = [camHUD];
 
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
@@ -1346,13 +1309,13 @@ class PlayState extends MusicBeatState
 		perfectMode = false;
 		#end
 
-		if (FlxG.keys.justPressed.NINE)
+		/*if (FlxG.keys.justPressed.NINE)
 		{
 			if (iconP1.animation.curAnim.name == 'bf-old')
 				iconP1.animation.play(SONG.player1);
 			else
 				iconP1.animation.play('bf-old');
-		}
+		}*/
 
 		switch (curStage)
 		{
@@ -1371,8 +1334,6 @@ class PlayState extends MusicBeatState
 		}
 
 		super.update(elapsed);
-
-		scoreTxt.text = "Score:" + songScore;
 
 		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
 		{
@@ -1406,29 +1367,7 @@ class PlayState extends MusicBeatState
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
 		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);
 
-		iconP1.setGraphicSize(Std.int(FlxMath.lerp(150, iconP1.width, 0.50)));
-		iconP2.setGraphicSize(Std.int(FlxMath.lerp(150, iconP2.width, 0.50)));
-
-		iconP1.updateHitbox();
-		iconP2.updateHitbox();
-
-		var iconOffset:Int = 26;
-
-		iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01) - iconOffset);
-		iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (iconP2.width - iconOffset);
-
-		if (health > 2)
-			health = 2;
-
-		if (healthBar.percent < 20)
-			iconP1.animation.curAnim.curFrame = 1;
-		else
-			iconP1.animation.curAnim.curFrame = 0;
-
-		if (healthBar.percent > 80)
-			iconP2.animation.curAnim.curFrame = 1;
-		else
-			iconP2.animation.curAnim.curFrame = 0;
+		hud.updateHUD(health, songScore);
 
 		/* if (FlxG.keys.justPressed.NINE)
 			FlxG.switchState(new Charting()); */
@@ -1462,8 +1401,8 @@ class PlayState extends MusicBeatState
 				{
 					songTime = (songTime + Conductor.songPosition) / 2;
 					Conductor.lastSongPos = Conductor.songPosition;
-					// Conductor.songPosition += elapsed * 1000;
-					// trace('MISSED FRAME');
+					/* Conductor.songPosition += elapsed * 1000;
+					trace('MISSED FRAME'); */
 				}
 			}
 
@@ -1472,10 +1411,10 @@ class PlayState extends MusicBeatState
 
 		if (generatedMusic && PlayState.SONG.notes[Std.int(curStep / 16)] != null)
 		{
-			if (curBeat % 4 == 0)
+			/*if (curBeat % 4 == 0)
 			{
-				// trace(PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection);
-			}
+				trace(PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection);
+			}*/
 
 			if (camFollow.x != player2.getMidpoint().x + 150 && !PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
 			{
@@ -1486,6 +1425,7 @@ class PlayState extends MusicBeatState
 				{
 					case 'mom':
 						camFollow.y = player2.getMidpoint().y;
+						vocals.volume = 1;
 					case 'senpai':
 						camFollow.y = player2.getMidpoint().y - 430;
 						camFollow.x = player2.getMidpoint().x - 100;
@@ -1494,16 +1434,13 @@ class PlayState extends MusicBeatState
 						camFollow.x = player2.getMidpoint().x - 100;
 				}
 
-				if (player2.curCharacter == 'mom')
-					vocals.volume = 1;
-
 				if (SONG.song.toLowerCase() == 'tutorial')
 				{
 					tweenCamIn();
 				}
 			}
 
-			if (PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && camFollow.x != player2.getMidpoint().x - 100)
+			if (PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && camFollow.x != player1.getMidpoint().x - 100)
 			{
 				camFollow.setPosition(player1.getMidpoint().x - 100, player1.getMidpoint().y - 100);
 
@@ -1513,10 +1450,7 @@ class PlayState extends MusicBeatState
 						camFollow.x = player1.getMidpoint().x - 300;
 					case 'mall':
 						camFollow.y = player1.getMidpoint().y - 200;
-					case 'school':
-						camFollow.x = player1.getMidpoint().x - 200;
-						camFollow.y = player1.getMidpoint().y - 200;
-					case 'schoolEvil':
+					case 'school' | 'schoolEvil':
 						camFollow.x = player1.getMidpoint().x - 200;
 						camFollow.y = player1.getMidpoint().y - 200;
 				}
@@ -2439,7 +2373,7 @@ class PlayState extends MusicBeatState
 
 	function lightningStrikeShit():Void
 	{
-		if (isHalloween && FlxG.random.bool(10) && curBeat > lightningStrikeBeat + lightningOffset){
+		if (curStage == "spooky" && FlxG.random.bool(10) && curBeat > lightningStrikeBeat + lightningOffset){
 			FlxG.sound.play(Paths.soundRandom('thunder_', 1, 2));
 			halloweenBG.animation.play('lightning');
 
@@ -2506,11 +2440,7 @@ class PlayState extends MusicBeatState
 			camHUD.zoom += 0.03;
 		}
 
-		iconP1.setGraphicSize(Std.int(iconP1.width + 30));
-		iconP2.setGraphicSize(Std.int(iconP2.width + 30));
-
-		iconP1.updateHitbox();
-		iconP2.updateHitbox();
+		hud.updateBeat();
 
 		if (curBeat % gfSpeed == 0)
 		{
