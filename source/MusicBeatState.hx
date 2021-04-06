@@ -24,11 +24,10 @@ class MusicBeatState extends FlxUIState
 		super.create();
 	}
 
-	override function update(elapsed:Float)
+	override function update(elapsed:Float):Void
 	{
 		Lib.application.window.frameRate = Lib.application.window.displayMode.refreshRate;
 		
-		//everyStep();
 		var oldStep:Int = curStep;
 
 		updateCurStep();
@@ -65,10 +64,5 @@ class MusicBeatState extends FlxUIState
 	{
 		if (curStep % 4 == 0)
 			beatHit();
-	}
-
-	public function beatHit():Void
-	{
-		//do literally nothing dumbass
 	}
 }

@@ -132,8 +132,8 @@ class MainMenuState extends MusicBeatState
 			}
 
 			/*if (controls.BACK)
-			{
-				FlxG.switchState(new TitleState());
+				{
+					FlxG.switchState(new TitleState());
 			}*/
 
 			if (controls.ACCEPT)
@@ -171,7 +171,7 @@ class MainMenuState extends MusicBeatState
 							{
 								var daChoice:String = optionShit[curSelected];
 								unloadAssets();
-								
+
 								switch (daChoice)
 								{
 									case 'story mode':

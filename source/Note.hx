@@ -158,7 +158,7 @@ class Note extends FlxSprite
 		}
 	}
 
-	override function update(elapsed:Float)
+	override function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
 

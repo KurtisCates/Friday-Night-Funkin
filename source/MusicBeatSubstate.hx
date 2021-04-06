@@ -16,12 +16,7 @@ class MusicBeatSubstate extends FlxSubState
 	inline function get_controls():Controls
 		return PlayerSettings.player1.controls;
 
-	public function new()
-	{
-		super();
-	}
-
-	override function update(elapsed:Float)
+	override function update(elapsed:Float):Void
 	{
 		FlxG.stage.frameRate = FlxG.stage.window.displayMode.refreshRate;
 

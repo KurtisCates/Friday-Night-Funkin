@@ -8,7 +8,7 @@ import flixel.util.FlxColor;
 
 class OptionsState extends MusicBeatSubstate
 {
-    var textMenuItems:Array<String> = ['Controls', 'Erase Save Data'];
+	var textMenuItems:Array<String> = ['Controls', 'Erase Save Data'];
 
 	var selector:FlxSprite;
 	var curSelected:Int = 0;
@@ -37,24 +37,29 @@ class OptionsState extends MusicBeatSubstate
 	{
 		super.update(elapsed);
 
-		if (controls.UP_P) { curSelected -= 1; }
-		else if (controls.DOWN_P) { curSelected += 1; }
-		else if (controls.BACK) { FlxG.switchState(new MainMenuState()); }
+		if (controls.UP_P)
+			curSelected -= 1;
+		else if (controls.DOWN_P)
+			curSelected += 1;
+		else if (controls.BACK)
+			FlxG.switchState(new MainMenuState());
 		else if (controls.ACCEPT)
 		{
 			switch (textMenuItems[curSelected])
 			{
 				case "Controls":
-					// SSSSSS
-                case "Erase Save Data":
-                    onClear();
+				// SSSSSS
+				case "Erase Save Data":
+					onClear();
 			}
 
 			trace(textMenuItems[curSelected]);
 		}
 
-		if (curSelected < 0) { curSelected = textMenuItems.length - 1; }
-		else if (curSelected >= textMenuItems.length) { curSelected = 0; }
+		if (curSelected < 0)
+			curSelected = textMenuItems.length - 1;
+		else if (curSelected >= textMenuItems.length)
+			curSelected = 0;
 
 		grpOptionsTexts.forEach(function(txt:FlxText)
 		{
@@ -65,11 +70,11 @@ class OptionsState extends MusicBeatSubstate
 		});
 	}
 
-    function onClear():Void
-    {
-        var defaultWeekUnlocked:Array<Bool> = [true, true, false, false, false, false, false];
+	function onClear():Void
+	{
+		var defaultWeekUnlocked:Array<Bool> = [true, true, false, false, false, false, false];
 
 		FlxG.save.data.weekUnlocked = defaultWeekUnlocked;
-        FlxG.switchState(new MainMenuState());
-    }
+		FlxG.switchState(new MainMenuState());
+	}
 }

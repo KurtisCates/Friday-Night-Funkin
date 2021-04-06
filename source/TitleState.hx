@@ -398,9 +398,7 @@ class TitleState extends MusicBeatState
 		// Do we already have a save? if not then we need to make one
 		if (FlxG.save.data.weekUnlocked == null)
 		{
-			var defaultWeekUnlocked:Array<Bool> = [true, true, false, false, false, false, false];
-
-			FlxG.save.data.weekUnlocked = defaultWeekUnlocked;
+			FlxG.save.data.weekUnlocked = [true, true, false, false, false, false, false];
 		}
 		else
 		{

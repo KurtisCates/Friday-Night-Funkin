@@ -533,7 +533,7 @@ class Character extends FlxSprite
 		}
 	}
 
-	override function update(elapsed:Float)
+	override function update(elapsed:Float):Void
 	{
 		if (!curCharacter.startsWith('bf'))
 		{
@@ -584,7 +584,7 @@ class Character extends FlxSprite
 						else
 							playAnim('danceLeft');
 					}
-				
+
 				case 'spooky':
 					danced = !danced;
 

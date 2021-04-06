@@ -10,11 +10,6 @@ class GitarooPause extends MusicBeatState
 
 	var replaySelect:Bool = false;
 
-	public function new():Void
-	{
-		super();
-	}
-
 	override public function create():Void
 	{
 		if (FlxG.sound.music != null)

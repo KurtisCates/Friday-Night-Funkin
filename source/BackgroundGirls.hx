@@ -4,6 +4,8 @@ import flixel.FlxSprite;
 
 class BackgroundGirls extends FlxSprite
 {
+	var danceDir:Bool = false;
+
 	public function new(x:Float, y:Float)
 	{
 		super(x, y);
@@ -16,8 +18,6 @@ class BackgroundGirls extends FlxSprite
 
 		animation.play('danceLeft');
 	}
-
-	var danceDir:Bool = false;
 
 	public function getScared():Void
 	{
