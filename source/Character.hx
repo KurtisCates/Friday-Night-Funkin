@@ -138,12 +138,12 @@ class Character extends FlxSprite
 			case 'spooky':
 				tex = Paths.getSparrowAtlas('characters/spooky_kids_assets');
 				frames = tex;
-				animation.addByPrefix('singUP', 'spooky UP NOTE', 24, false);
-				animation.addByPrefix('singDOWN', 'spooky DOWN note', 24, false);
-				animation.addByPrefix('singLEFT', 'note sing left', 24, false);
-				animation.addByPrefix('singRIGHT', 'spooky sing right', 24, false);
-				animation.addByIndices('danceLeft', 'spooky dance idle', [0, 2, 6], "", 12, false);
-				animation.addByIndices('danceRight', 'spooky dance idle', [8, 10, 12, 14], "", 12, false);
+				animation.addByPrefix('singUP', 'Spooky Up Note', 24, false);
+				animation.addByPrefix('singDOWN', 'Spooky Down Note', 24, false);
+				animation.addByPrefix('singLEFT', 'Spooky Left Note', 24, false);
+				animation.addByPrefix('singRIGHT', 'Spooky Right Note', 24, false);
+				animation.addByIndices('danceLeft', 'Spooky Idle', [0, 2, 6], "", 12, false);
+				animation.addByIndices('danceRight', 'Spooky Idle', [8, 10, 12, 14], "", 12, false);
 
 				addOffset('danceLeft');
 				addOffset('danceRight');

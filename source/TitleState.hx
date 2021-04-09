@@ -332,9 +332,9 @@ class TitleState extends MusicBeatState
 		}
 	}
 
-	override function beatHit()
+	override function onBeatHit()
 	{
-		super.beatHit();
+		super.onBeatHit();
 
 		if (logoBl != null) { logoBl.animation.play('bump'); }
 		danceLeft = !danceLeft;
