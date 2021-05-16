@@ -228,7 +228,7 @@ class PlayState extends MusicBeatState
 					FlxG.sound.cache(Paths.sound('thunder_1'));
 					FlxG.sound.cache(Paths.sound('thunder_2'));
 				}
-			case 'pico' | 'blammed' | 'philly':
+			case 'pico' | 'blammed' | 'philly-nice':
 				{
 					curStage = 'philly';
 
@@ -2347,17 +2347,21 @@ class PlayState extends MusicBeatState
 			player1.playAnim('idle');
 		}
 
-		if (curBeat % 8 == 7 && curSong == 'Bopeebo')
-		{
-			player1.playAnim('hey', true);
-		}
-
 		if (curBeat % 8 == 7)
 		{
-			if (curSong == 'Bopeebo' || curSong == 'Fresh')
+			switch (curSong)
 			{
-				gf.playAnim('cheer', true);
-			} // Dadbattle is too buggy. Return to it later when im not fucking lazy.
+				case 'Bopeebo':
+					{
+						player1.playAnim('idle');
+						gf.playAnim('cheer', true);
+					}
+				case 'Fresh':
+					{
+						gf.playAnim('cheer', true);
+					}
+				// Dadbattle is too buggy. Return to it later when im not fucking lazy.
+			}
 		}
 
 		switch (curStage)
