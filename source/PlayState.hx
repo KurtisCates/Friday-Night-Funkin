@@ -2353,7 +2353,7 @@ class PlayState extends MusicBeatState
 			{
 				case 'Bopeebo':
 					{
-						player1.playAnim('idle');
+						player1.playAnim('hey');
 						gf.playAnim('cheer', true);
 					}
 				case 'Fresh':
