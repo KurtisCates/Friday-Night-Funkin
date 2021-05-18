@@ -101,8 +101,6 @@ class PlayState extends MusicBeatState
 
 	var defaultCamZoom:Float = 1.05;
 
-	var trackedAssets:Array<FlxBasic> = [];
-
 	// how big to stretch the pixel art assets
 	public static var daPixelZoom:Float = 6;
 
@@ -120,6 +118,7 @@ class PlayState extends MusicBeatState
 	var detailsText:String = "";
 	var detailsPausedText:String = "";
 	#end
+	var trackedAssets:Array<FlxBasic> = [];
 
 	override public function create():Void
 	{

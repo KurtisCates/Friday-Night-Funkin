@@ -20,12 +20,7 @@ class MenuItem extends FlxSpriteGroup
 		add(week);
 	}
 
-	private var isFlashing:Bool = false;
-
-	public function startFlashing():Void
-	{
-		isFlashing = true;
-	}
+	public var isFlashing:Bool = false;
 
 	override function update(elapsed:Float)
 	{
