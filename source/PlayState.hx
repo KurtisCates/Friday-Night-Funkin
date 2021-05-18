@@ -156,8 +156,8 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.getTextFile(Paths.txt('bopeebo/bopeeboDialogue'));
 			case 'fresh':
 				dialogue = CoolUtil.getTextFile(Paths.txt('fresh/freshDialogue'));
-			case 'dadbattle':
-				dialogue = CoolUtil.getTextFile(Paths.txt('dadbattle/dadbattleDialogue'));
+			case 'dad-battle':
+				dialogue = CoolUtil.getTextFile(Paths.txt('dad-battle/dad-battleDialogue'));
 			case 'senpai':
 				dialogue = CoolUtil.getTextFile(Paths.txt('senpai/senpaiDialogue'));
 			case 'roses':
@@ -749,7 +749,7 @@ class PlayState extends MusicBeatState
 				case 'roses':
 					FlxG.sound.play(Paths.sound('ANGRY'));
 					schoolIntro(doof);
-				case 'tutorial' | 'bopeebo' | 'fresh' | 'dadbattle':
+				case 'tutorial' | 'bopeebo' | 'fresh' | 'dad-battle':
 					stageIntro(doof);
 				default:
 					startCountdown();
@@ -2359,7 +2359,7 @@ class PlayState extends MusicBeatState
 					{
 						gf.playAnim('cheer', true);
 					}
-				// Dadbattle is too buggy. Return to it later when im not fucking lazy.
+				// Dad-Battle is too buggy. Return to it later when im not fucking lazy.
 			}
 		}
 

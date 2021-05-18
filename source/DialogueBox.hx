@@ -37,7 +37,7 @@ class DialogueBox extends FlxTypedGroup<FlxSprite>
 
 		switch (PlayState.SONG.song.toLowerCase())
 		{
-			case 'senpai' | 'tutorial' | 'bopeebo' | 'fresh' | 'dadbattle':
+			case 'senpai' | 'tutorial' | 'bopeebo' | 'fresh' | 'dad-battle':
 				FlxG.sound.playMusic(Paths.music('Lunchbox'), 0);
 				FlxG.sound.music.fadeIn(1, 0, 0.8);
 			case 'thorns':
@@ -84,7 +84,7 @@ class DialogueBox extends FlxTypedGroup<FlxSprite>
 				var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.image('weeb/spiritFaceForward'));
 				face.setGraphicSize(Std.int(face.width * 6));
 				add(face);
-			case 'tutorial' | 'bopeebo' | 'fresh' | 'dadbattle':
+			case 'tutorial' | 'bopeebo' | 'fresh' | 'dad-battle':
 				hasDialog = true;
 				box.frames = Paths.getSparrowAtlas('speech_bubble_talking');
 				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
@@ -121,7 +121,7 @@ class DialogueBox extends FlxTypedGroup<FlxSprite>
 				box.setGraphicSize(Std.int(box.width * PlayState.daPixelZoom * 0.9));
 				box.updateHitbox();
 				add(box);
-			case 'tutorial' | 'bopeebo' | 'fresh' | 'dadbattle':
+			case 'tutorial' | 'bopeebo' | 'fresh' | 'dad-battle':
 				box.animation.play('normalOpen');
 				box.antialiasing = true;
 				box.updateHitbox();
@@ -160,7 +160,7 @@ class DialogueBox extends FlxTypedGroup<FlxSprite>
 				portraitLeft.visible = false;
 				swagDialogue.color = FlxColor.WHITE;
 				dropText.color = FlxColor.BLACK;
-			case 'tutorial' | 'bopeebo' | 'fresh' | 'dadbattle':
+			case 'tutorial' | 'bopeebo' | 'fresh' | 'dad-battle':
 				portraitLeft.visible = false;
 				portraitRight.visible = false;
 				swagDialogue.color = FlxColor.BLACK;
@@ -198,7 +198,7 @@ class DialogueBox extends FlxTypedGroup<FlxSprite>
 
 					if (PlayState.SONG.song.toLowerCase() == 'senpai' || PlayState.SONG.song.toLowerCase() == 'tutorial'
 						|| PlayState.SONG.song.toLowerCase() == 'bopeebo' || PlayState.SONG.song.toLowerCase() == 'fresh'
-						|| PlayState.SONG.song.toLowerCase() == 'dadbattle' || PlayState.SONG.song.toLowerCase() == 'thorns')
+						|| PlayState.SONG.song.toLowerCase() == 'dad-battle' || PlayState.SONG.song.toLowerCase() == 'thorns')
 						FlxG.sound.music.fadeOut(2.2, 0);
 
 					new FlxTimer().start(0.2, function(tmr:FlxTimer)
