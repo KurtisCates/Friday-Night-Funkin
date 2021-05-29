@@ -35,6 +35,16 @@ class HealthIcon extends FlxSprite
 					loadGraphic(Paths.image('icons/icon-parents'), true, 150, 150);
 					antialiasing = true;
 				}
+			case 'mom-car':
+				{
+					loadGraphic(Paths.image('icons/icon-mom'), true, 150, 150);
+					antialiasing = true;
+				}
+			case 'bf-car' | 'bf-christmas':
+				{
+					loadGraphic(Paths.image('icons/icon-bf'), true, 150, 150);
+					antialiasing = true;
+				}
 			default:
 				{
 					loadGraphic(Paths.image('icons/icon-' + char), true, 150, 150);
