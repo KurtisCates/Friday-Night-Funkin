@@ -19,8 +19,8 @@ class HUD extends FlxTypedGroup<FlxSprite>
 	private var strumLine:FlxSprite;
 	private var healthBarBG:FlxSprite;
 	private var healthBar:FlxBar;
-	private var iconP1:FlxSprite;
-	private var iconP2:FlxSprite;
+	private var iconP1:HealthIcon;
+	private var iconP2:HealthIcon;
 	private var scoreTxt:FlxText;
 
 	/**
@@ -76,14 +76,14 @@ class HUD extends FlxTypedGroup<FlxSprite>
 			health = 2;
 
 		if (healthBar.percent < 20)
-			iconP1.animation.curAnim.curFrame = 1;
+			iconP1.changeIcon(true);
 		else
-			iconP1.animation.curAnim.curFrame = 0;
+			iconP1.changeIcon(false);
 
 		if (healthBar.percent > 80)
-			iconP2.animation.curAnim.curFrame = 1;
+			iconP2.changeIcon(true);
 		else
-			iconP2.animation.curAnim.curFrame = 0;
+			iconP2.changeIcon(false);
 
 		scoreTxt.text = "Score:" + score;
 	}
