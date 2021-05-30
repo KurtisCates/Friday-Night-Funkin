@@ -22,7 +22,7 @@ class HealthIcon extends FlxSprite
 				}
 			case 'bf-pixel' | 'senpai' | 'senpai-angry' | 'spirit':
 				{
-					loadGraphic(Paths.image('icons/icon-' + char), true, 150, 150);
+					loadGraphic(Paths.image('icons/icon-$char'), true, 150, 150);
 					antialiasing = false;
 				}
 			case 'monster-christmas':
@@ -47,7 +47,7 @@ class HealthIcon extends FlxSprite
 				}
 			default:
 				{
-					loadGraphic(Paths.image('icons/icon-' + char), true, 150, 150);
+					loadGraphic(Paths.image('icons/icon-$char'), true, 150, 150);
 					antialiasing = true;
 				}
 		}
