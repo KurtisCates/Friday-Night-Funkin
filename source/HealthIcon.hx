@@ -20,9 +20,14 @@ class HealthIcon extends FlxSprite
 					loadGraphic(Paths.image('icons/icon-face'), true, 150, 150);
 					antialiasing = true;
 				}
-			case 'bf-pixel' | 'senpai' | 'senpai-angry' | 'spirit':
+			case 'bf-pixel' | 'senpai' | 'spirit':
 				{
 					loadGraphic(Paths.image('icons/icon-$char'), true, 150, 150);
+					antialiasing = false;
+				}
+			case 'senpai-angry':
+				{
+					loadGraphic(Paths.image('icons/icon-senpai'), true, 150, 150);
 					antialiasing = false;
 				}
 			case 'monster-christmas':
