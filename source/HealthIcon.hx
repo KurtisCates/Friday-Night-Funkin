@@ -57,18 +57,19 @@ class HealthIcon extends FlxSprite
 				}
 		}
 
-		animation.add(char, [0, 1], 0, false, isPlayer);
-		animation.play(char);
+		animation.add("icon1", [0], 0, false, isPlayer);
+		animation.add("icon2", [1], 0, false, isPlayer);
+		animation.play("icon1");
 
 		scrollFactor.set();
 	}
 
 	public function changeIcon(isLossing:Bool) {
 		if (isLossing) {
-			animation.curAnim.curFrame = 1;
+			animation.play("icon2");
 		}
 		else {
-			animation.curAnim.curFrame = 0;
+			animation.play("icon1");
 		}
 	}
 

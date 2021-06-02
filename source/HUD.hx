@@ -72,8 +72,9 @@ class HUD extends FlxTypedGroup<FlxSprite>
 		iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01) - iconOffset);
 		iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (iconP2.width - iconOffset);
 
-		if (health > 2)
+		if (health >= 2) {
 			health = 2;
+		}
 
 		if (healthBar.percent < 20)
 			iconP1.changeIcon(true);
